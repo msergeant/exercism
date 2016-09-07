@@ -6,11 +6,7 @@ defmodule Gigasecond do
 
   def from({{year, month, day}, {hours, minutes, seconds}}) do
     :calendar.datetime_to_gregorian_seconds({{year, month, day}, {hours, minutes, seconds}})
-    |> add_gigasecond()
+    |> Kernel.+(1_000_000_000)
     |> :calendar.gregorian_seconds_to_datetime()
-  end
-
-  defp add_gigasecond(x) do
-    x + 1000000000
   end
 end
