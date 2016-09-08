@@ -27,31 +27,26 @@ defmodule WordsTest do
     assert Words.count("car : carpet as java : javascript!!&@$%^&") == expected
   end
 
-  @tag :pending
   test "include numbers" do
     expected = %{"testing" => 2, "1" => 1, "2" => 1}
     assert Words.count("testing, 1, 2 testing") == expected
   end
 
-  @tag :pending
   test "hyphens" do
     expected = %{"co-operative" => 1}
     assert Words.count("co-operative") == expected
   end
 
-  @tag :pending
   test "ignore underscores" do
     expected = %{"two" => 1, "words" => 1}
     assert Words.count("two_words") == expected
   end
 
-  @tag :pending
   test "normalize case" do
     expected = %{"go" => 3}
     assert Words.count("go Go GO") == expected
   end
 
-  @tag :pending
   test "German" do
     expected = %{"götterfunken" => 1, "schöner" => 1, "freude" => 1}
     assert Words.count("Freude schöner Götterfunken") == expected
