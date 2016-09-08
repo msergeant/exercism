@@ -22,7 +22,7 @@ defmodule Words do
   end
 
   defp strip_invalid_chars(word) do
-    String.replace(word, ~r/[^a-z|0-9|\-|\x{00e4}|\x{00e9}|\x{00f6}|\x{00fc}|\x{00df}]/u, "")
+    String.replace(word, ~r/[\.,!@$%^&]/, "")
   end
 
   defp count_occurences(word, sentence_list) do
