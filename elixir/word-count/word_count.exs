@@ -6,11 +6,13 @@ defmodule Words do
   """
   @spec count(String.t) :: map
   def count(sentence) do
-    full_list = Enum.map(String.split(sentence, ~r/\s|_/), &String.downcase/1)
-    word_list = Enum.uniq(Enum.map(full_list, &strip_invalid_chars/1))
+    full_list = sentence
+                |> strip_invalid_chars
+                |> String.split(~r/\s|_/)
+                |> Enum.map(&String.downcase/1)
 
     Enum.reduce(
-      word_list,
+      Enum.uniq(full_list) ,
       %{},
       fn(x, acc) ->
         cond do
@@ -28,7 +30,7 @@ defmodule Words do
   defp count_occurences(word, sentence_list) do
     Enum.reduce(sentence_list, 0, fn(x, acc) ->
       cond do
-        strip_invalid_chars(x) == word -> acc + 1
+        x == word -> acc + 1
         true -> acc
       end
     end)
