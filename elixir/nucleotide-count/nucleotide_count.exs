@@ -13,20 +13,19 @@ defmodule NucleotideCount do
   1
   """
   @spec count([char], char) :: non_neg_integer
-  def count(strand, nucleotide) do
-    if not(Enum.member?(@nucleotides, nucleotide)) do
-      raise ArgumentError
-    end
-
+  def count(strand, nucleotide) when nucleotide in @nucleotides do
     Enum.reduce(strand, 0, fn(x, acc) ->
-        cond do
-          not(Enum.member?(@nucleotides, x)) -> raise ArgumentError
-          x == nucleotide -> acc + 1
-          true -> acc
-        end
+      cond do
+        not(Enum.member?(@nucleotides, x)) -> raise ArgumentError
+        x == nucleotide -> acc + 1
+        true -> acc
+      end
     end)
   end
 
+  def count(strand, nucleotide) do
+    raise ArgumentError
+  end
 
   @doc """
   Returns a summary of counts by nucleotide.
