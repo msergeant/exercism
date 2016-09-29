@@ -23,7 +23,7 @@ defmodule RunLengthEncoder do
 
   defp recursive_decode(string, out_string) do
     {last_char, counter, string_without_last} = pop_end_char_count(string)
-    recursive_decode(string_without_last, Enum.reduce(1..counter, "", fn(_, acc) -> acc <> last_char end) <> out_string)
+    recursive_decode(string_without_last, String.duplicate(last_char, counter) <> out_string)
   end
 
   defp char_counter(char, "") do
