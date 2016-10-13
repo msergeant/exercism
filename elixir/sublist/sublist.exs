@@ -24,12 +24,10 @@ defmodule Sublist do
   end
 
   defp recursive_compare([], candidate_element, [candidate_element | _]) do
-    IO.puts "Empty"
     true
   end
 
   defp recursive_compare([x], x, [x]) do
-    IO.puts "All Match"
     true
   end
 
@@ -38,10 +36,6 @@ defmodule Sublist do
   end
 
   defp recursive_compare([matching_first_element | remaining_candidates], matching_first_element, [matching_first_element | remaining_elements]) do
-    #IO.puts "More recursion is needed"
-    #IO.inspect [matching_first_element | remaining_candidates]
-    #IO.puts matching_first_element
-    #IO.inspect [matching_first_element | remaining_elements]
     [new_candidate | _ ] = remaining_candidates
     recursive_compare(remaining_candidates, new_candidate, remaining_elements)
   end
