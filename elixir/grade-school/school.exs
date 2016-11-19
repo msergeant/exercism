@@ -10,10 +10,7 @@ defmodule School do
   """
   @spec add(map, String.t, integer) :: map
   def add(db, name, grade) do
-    Map.put(db, grade,
-      grade(db, grade)
-      |> List.insert_at(-1, name)
-    )
+    Map.put(db, grade, [name | grade(db, grade)])
   end
 
   @doc """
@@ -29,9 +26,8 @@ defmodule School do
   """
   @spec sort(map) :: [{integer, [String.t]}]
   def sort(db) do
-    Map.keys(db)
-    |> Enum.map(fn(key) ->
-      { key, Map.get(db, key) |> Enum.sort }
+    Enum.map(db, fn {key, val} ->
+      { key, val |> Enum.sort }
     end)
   end
 end
