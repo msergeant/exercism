@@ -39,12 +39,16 @@ defmodule Markdown do
     "<li>" <> join_words_with_tags(t) <> "</li>"
   end
 
+  defp enclose_with_tag(tag, content) do
+    "<#{tag}>#{content}</#{tag}>"
+  end
+
   defp enclose_with_header_tag({hl, htl}) do
-    "<h" <> hl <> ">" <> htl <> "</h" <> hl <> ">"
+    enclose_with_tag("h" <> hl, htl)
   end
 
   defp enclose_with_paragraph_tag(t) do
-    "<p>#{join_words_with_tags(t)}</p>"
+    enclose_with_tag("p", join_words_with_tags(t))
   end
 
   defp join_words_with_tags(t) do
