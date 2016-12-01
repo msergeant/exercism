@@ -65,16 +65,16 @@ defmodule Markdown do
 
   defp replace_prefix_md(w) do
     cond do
-      w =~ ~r/^#{"__"}{1}/ -> String.replace(w, ~r/^#{"__"}{1}/, "<strong>", global: false)
-      w =~ ~r/^[#{"_"}{1}][^#{"_"}+]/ -> String.replace(w, ~r/_/, "<em>", global: false)
+      w =~ ~r/^__/ -> String.replace(w, ~r/^__/, "<strong>")
+      w =~ ~r/^_/ -> String.replace(w, ~r/^_/, "<em>")
       true -> w
     end
   end
 
   defp replace_suffix_md(w) do
     cond do
-      w =~ ~r/#{"__"}{1}$/ -> String.replace(w, ~r/#{"__"}{1}$/, "</strong>")
-      w =~ ~r/[^#{"_"}{1}]/ -> String.replace(w, ~r/_/, "</em>")
+      w =~ ~r/__$/ -> String.replace(w, ~r/__$/, "</strong>")
+      w =~ ~r/_$/ -> String.replace(w, ~r/_$/, "</em>")
       true -> w
     end
   end
