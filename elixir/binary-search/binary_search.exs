@@ -19,6 +19,19 @@ defmodule BinarySearch do
 
   @spec search(tuple, integer) :: {:ok, integer} | :not_found
   def search(numbers, key) do
+    recursive_search(0, Tuple.to_list(numbers), key)
+  end
 
+  defp recursive_search(index, [key], key) do {:ok, index} end
+  defp recursive_search(_, [key], _) do :not_found end
+  defp recursive_search(_, [], _) do :not_found end
+  defp recursive_search(index, numbers, key) do
+    len = round(length(numbers) / 2)
+    [left, right] = Enum.chunk(numbers, len, len, [])
+    cond do
+      List.first(right) == key -> {:ok, index + len}
+      List.first(right) > key -> recursive_search(index, left, key)
+      true -> recursive_search(index + len, right, key)
+    end
   end
 end
