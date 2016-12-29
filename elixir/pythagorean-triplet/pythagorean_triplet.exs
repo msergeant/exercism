@@ -29,15 +29,11 @@ defmodule Triplet do
   """
   @spec generate(non_neg_integer, non_neg_integer) :: [list(non_neg_integer)]
   def generate(min, max) do
-    min..max |> Enum.reduce([], fn(i, acc) ->
-      (i+1)..max |> Enum.reduce(acc, fn(j,acc) ->
-        c = :math.pow(:math.pow(i,2) + :math.pow(j,2), 0.5) |> round
-        cond do
-          c <= max and pythagorean?([i,j,c]) -> acc ++ [[i,j,c]]
-          true -> acc
-        end
-      end)
-    end)
+    for i <- min..max-2,
+        j <- i+1..max-1,
+        c <- j+1..max,
+        pythagorean?([i,j,c]),
+        do: [i,j,c]
   end
 
   @doc """
