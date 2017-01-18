@@ -30,10 +30,13 @@ defmodule Minesweeper do
     |> List.replace_at(j, replaced)
   end
 
-  defp sum_mines(board_chars, i, j) do
+  def sum_mines(board_chars, i, j) do
+    len = length(board_chars)
+    width = board_chars |> List.first |> length
+
     for(x <- i-1..i+1,
         y <- j-1..j+1,
-        fn([x,y]) -> [x,y] != [i,j] end,
+        ([x,y] != [i,j]) && (y < len) && (x < width),
         do: [x,y])
         |> Enum.filter(fn([x,y]) -> mine_at?(board_chars, x,y) end)
         |> length
@@ -41,14 +44,7 @@ defmodule Minesweeper do
 
   defp mine_at?(_, i, j) when i < 0 or j < 0 do false end
   defp mine_at?(board_chars, i, j) do
-    len = length(board_chars)
-    width = board_chars |> List.first |> length
-
-    cond do
-      i >= width -> false
-      j >= len -> false
-      true -> char_at(board_chars, i, j) == "*"
-    end
+    char_at(board_chars, i, j) == "*"
   end
 
   defp char_at(board_chars, i, j) do
