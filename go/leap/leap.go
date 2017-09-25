@@ -1,10 +1,9 @@
-// Package used to find whether a given year is a leap year
+// Package leap provides function for finding leap years
 package leap
 
 const testVersion = 3
 
-// returns true if year is a leap year
-// returns false if year is not a leap year
+// IsLeapYear returns true for leap years, false for non-leap years
 func IsLeapYear(y int) bool {
 	switch {
 	case y%4 != 0:
