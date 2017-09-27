@@ -12,7 +12,7 @@ func IsPangram(inString string) bool {
 	s := strings.ToLower(inString)
 	returnVal := true
 	for _, ch := range "abcdefghijklmnopqrstuvwxyz" {
-		if !strings.Contains(s, string(ch)) {
+		if !strings.ContainsRune(s, ch) {
 			returnVal = false
 		}
 	}
