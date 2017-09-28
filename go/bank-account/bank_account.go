@@ -10,7 +10,7 @@ const testVersion = 1
 type Account struct {
 	open         bool
 	amount       int
-	accountMutex sync.Mutex
+	accountMutex *sync.Mutex
 }
 
 // Open returns a newly created account
@@ -18,7 +18,7 @@ func Open(amount int) *Account {
 	if amount < 0 {
 		return nil
 	}
-	return &Account{amount: amount, open: true}
+	return &Account{amount: amount, open: true, accountMutex: &sync.Mutex{}}
 }
 
 // Balance returns the current balance
