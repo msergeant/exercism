@@ -33,23 +33,21 @@ func (a *Account) Balance() (int, bool) {
 // Close closes the account and returns the balance
 func (a *Account) Close() (int, bool) {
 	a.accountMutex.Lock()
+	defer a.accountMutex.Unlock()
 	if !a.open {
-		a.accountMutex.Unlock()
 		return 0, false
 	}
 	a.open = false
-	a.accountMutex.Unlock()
 	return a.amount, true
 }
 
 // Deposit adds money to the current balance and returns the current balance
 func (a *Account) Deposit(d int) (int, bool) {
 	a.accountMutex.Lock()
+	defer a.accountMutex.Unlock()
 	if !a.open || (a.amount+d < 0) {
-		a.accountMutex.Unlock()
 		return -1, false
 	}
 	a.amount += d
-	a.accountMutex.Unlock()
 	return a.amount, true
 }
