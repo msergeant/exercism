@@ -5,14 +5,15 @@ import (
 	"math"
 )
 
-const testVersion = 3
+const (
+	NaT         = iota // not a triangle
+	Equ                // equilateral
+	Iso                // isosceles
+	Sca                // scalene
+	testVersion = 3
+)
 
 type Kind int
-
-const NaT Kind = 0 // not a triangle
-const Equ Kind = 1 // equilateral
-const Iso Kind = 2 // isosceles
-const Sca Kind = 3 // scalene
 
 func KindFromSides(a, b, c float64) Kind {
 	switch {
