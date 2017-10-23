@@ -17,17 +17,15 @@ func Square(n int) (output uint64, err error) {
 		return
 	}
 
-	output = uint64(math.Pow(2, float64(n-1)))
+	// 2 ^ (n-1)
+	output = 1 << uint(n-1)
 
 	return
 }
 
 // Total returns the number of grains on all the squares
 func Total() (output uint64) {
-	output = 1
-	for i := 0; i < 63; i += 1 {
-		output = output * 2
-	}
-	output = output - 1 + output
+	// one less than 2 ^ 64
+	output = math.MaxUint64
 	return
 }
