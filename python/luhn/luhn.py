@@ -18,13 +18,7 @@ class Luhn(object):
 
     def _digit_lambda(self, idx, num):
         num = int(num)
-        if idx % 2 != 0:
-            return self._digit_doubler(num)
-        else:
-            return num
+        return num if idx % 2 == 0 else self._digit_doubler(num)
 
     def _digit_doubler(self, num):
-        if(num >= 5):
-            return 2 * num - 9
-        else:
-            return 2 * num
+        return 2 * num if num < 5 else 2 * num - 9
