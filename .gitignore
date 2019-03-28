@@ -3,5 +3,8 @@ __pycache__/
 *$py.class
 *.exercism
 *.lein-failures
+*.lein-repl-history
+*.nrepl-port
+
 target/
 
