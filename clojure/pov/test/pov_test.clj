@@ -116,23 +116,23 @@
          (pov/of :x target-with-children))
       "Can handle complex trees"))
 
-;(deftest not-found
-  ;(is (nil? (pov/of :not-found! target-with-children))
-      ;"Returns nil if we cannot reparent")
-  ;(is (nil? (pov/of :x []))
-      ;"Return nil if the input is empty")
-  ;(is (nil? (pov/of :x nil))
-      ;"Returns nil if the input is nil"))
+(deftest not-found
+  (is (nil? (pov/of :not-found! target-with-children))
+      "Returns nil if we cannot reparent")
+  (is (nil? (pov/of :x []))
+      "Return nil if the input is empty")
+  (is (nil? (pov/of :x nil))
+      "Returns nil if the input is nil"))
 
-;(deftest path-from-to
-  ;(is (= [:x :parent]
-         ;(pov/path-from-to :x :parent simple-tree))
-      ;"Can trace a path from target to parent")
-  ;(is (= [:x :parent :sib-c]
-         ;(pov/path-from-to :x :sib-c large-flat))
-      ;"Can trace a path from target to sibling")
-  ;(is (= [:x :parent :grand-parent :aunt :cousin-1 :2nd-cousin-1]
-         ;(pov/path-from-to :x :2nd-cousin-1 target-with-children))
-      ;"Can trace a path from :x to :2nd-cousin-1")
-  ;(is (nil? (pov/path-from-to :x :not-there! cousins))
-      ;"Returns nil if there is no path"))
+(deftest path-from-to
+  (is (= [:x :parent]
+         (pov/path-from-to :x :parent simple-tree))
+      "Can trace a path from target to parent")
+  (is (= [:x :parent :sib-c]
+         (pov/path-from-to :x :sib-c large-flat))
+      "Can trace a path from target to sibling")
+  (is (= [:x :parent :grand-parent :aunt :cousin-1 :2nd-cousin-1]
+         (pov/path-from-to :x :2nd-cousin-1 target-with-children))
+      "Can trace a path from :x to :2nd-cousin-1")
+  (is (nil? (pov/path-from-to :x :not-there! cousins))
+      "Returns nil if there is no path"))
