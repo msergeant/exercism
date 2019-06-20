@@ -27,6 +27,17 @@
 (defn of [node full-graph] ;; <- arglist goes here
   (build-pov node full-graph))
 
-(defn path-from-to [] ;; <- arglist goes here
-  ;; your code goes here
-)
+
+(defn find-target [target graph path]
+  (let [level-key (first graph)
+        children (rest graph)]
+    (if (= level-key target)
+      (conj path target)
+      (when (seq children)
+        (let [new-path (conj path level-key)
+              target-tests (map #(find-target target % new-path) children)]
+          (some identity target-tests))))))
+
+(defn path-from-to [from to full-graph] ;; <- arglist goes here
+  (let [pov (of from full-graph)]
+    (find-target to pov [])))
