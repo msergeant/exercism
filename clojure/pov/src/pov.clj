@@ -18,11 +18,11 @@
       (if (= node parent)
         level
         (let [povs (map #(build-pov node %) children)
-             siblings (remove nil? (map #(when (nil? %2) %1) children povs))
-             found-node (some identity povs)
-             direct-children (map first children)]
-         (when found-node
-           (inject-parent found-node siblings parent direct-children)))))))
+              siblings (remove nil? (map #(when (nil? %2) %1) children povs))
+              found-node (some identity povs)
+              direct-children (map first children)]
+          (when found-node
+            (inject-parent found-node siblings parent direct-children)))))))
 
 (defn of [node full-graph] ;; <- arglist goes here
   (build-pov node full-graph))
