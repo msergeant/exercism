@@ -1,7 +1,5 @@
 (ns pov)
 
-(defn depth [x] (if (coll? x) (+ 1 (apply max (map depth x))) 0))
-
 (defn inject-parent [node siblings parent direct-children]
   (let [last-element (last node)
         node-key (first node)]
